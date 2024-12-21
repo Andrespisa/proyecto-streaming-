@@ -1,50 +1,31 @@
 package main
 
-import "time"
+import (
+	"encoding/json"
+	"net/http"
+	"time"
+)
 
-// Usuario representa un usuario del sistema.
+// Definición de la estructura Usuario
 type Usuario struct {
-	idUsuario         string
-	nombre            string
-	apellido          string
-	correoElectronico string
-	contrasena        string
-	fechaRegistro     time.Time
+	IDUsuario     string
+	Nombre        string
+	Apellido      string
+	Email         string
+	Password      string
+	FechaCreacion time.Time
 }
 
-// NewUsuario es un constructor que crea un nuevo usuario
-func NewUsuario(id, nombre, apellido, correo, contrasena string, fechaRegistro time.Time) *Usuario {
-	return &Usuario{
-		idUsuario:         id,
-		nombre:            nombre,
-		apellido:          apellido,
-		correoElectronico: correo,
-		contrasena:        contrasena,
-		fechaRegistro:     fechaRegistro,
-	}
+// Constructor para Usuario
+func NewUsuario(id, nombre, apellido, email, password string, fechaCreacion time.Time) *Usuario {
+	return &Usuario{id, nombre, apellido, email, password, fechaCreacion}
 }
 
-// Métodos Getter (accesores)
-func (u *Usuario) GetIDUsuario() string {
-	return u.idUsuario
+// Manejo de usuarios (JSON)
+func handleUsuarios(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(usuarios)
 }
 
-func (u *Usuario) GetNombre() string {
-	return u.nombre
-}
-
-func (u *Usuario) GetApellido() string {
-	return u.apellido
-}
-
-func (u *Usuario) GetCorreoElectronico() string {
-	return u.correoElectronico
-}
-
-func (u *Usuario) GetContrasena() string {
-	return u.contrasena
-}
-
-func (u *Usuario) GetFechaRegistro() time.Time {
-	return u.fechaRegistro
-}
+// Datos iniciales de usuarios
+var usuarios []Usuario
