@@ -89,3 +89,48 @@ func verificarCrearTablaUsuarios() error {
 	fmt.Println("Tabla 'usuarios' y la columna 'FechaCreacion' verificados correctamente.")
 	return nil
 }
+
+// verificar y crea la tabla de suscripciones' si no existe
+func verificarCrearTablaSuscripciones() error {
+	query := `
+    CREATE TABLE IF NOT EXISTS suscripciones (
+        id_suscripcion INT AUTO_INCREMENT PRIMARY KEY,
+        id_usuario INT NOT NULL,
+        tipo_plan VARCHAR(255) NOT NULL,
+        fecha_inicio DATETIME NOT NULL,
+        fecha_expiracion DATETIME NOT NULL,
+        FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    `
+	// Intentar crear la tabla si no existe
+	_, err := db.Exec(query)
+	if err != nil {
+		return fmt.Errorf("error al crear/verificar la tabla 'suscripciones': %v", err)
+	}
+
+	fmt.Println("Tabla 'suscripciones' verificada correctamente.")
+	return nil
+}
+
+// Verificar y crear la tabla `contenidos` si no existe
+func verificarCrearTablaContenidos() error {
+	query := `
+    CREATE TABLE IF NOT EXISTS contenidos (
+        idcontenido INT AUTO_INCREMENT PRIMARY KEY,
+        titulo VARCHAR(255) NOT NULL,
+        descripcion TEXT NOT NULL,
+        genero VARCHAR(100),
+        duracion VARCHAR(50),
+        tags VARCHAR(255),
+        fechaestreno DATETIME NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    `
+	// Intentar crear la tabla si no existe
+	_, err := db.Exec(query)
+	if err != nil {
+		return fmt.Errorf("error al crear/verificar la tabla 'contenidos': %v", err)
+	}
+
+	fmt.Println("Tabla 'contenidos' verificada correctamente.")
+	return nil
+}

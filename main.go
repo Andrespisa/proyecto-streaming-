@@ -104,16 +104,6 @@ func serveRegisterPage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// Función para la página de contenido
-func handleContenidos(w http.ResponseWriter, r *http.Request) {
-	data := struct {
-		Title string
-	}{
-		Title: "Contenidos - SPREEM",
-	}
-	renderTemplate(w, "contenido.html", data)
-}
-
 // Función para la página de perfil
 func handlePerfiles(w http.ResponseWriter, r *http.Request) {
 	data := struct {
@@ -122,4 +112,29 @@ func handlePerfiles(w http.ResponseWriter, r *http.Request) {
 		Title: "Perfiles - SPREEM",
 	}
 	renderTemplate(w, "perfil.html", data)
+}
+
+///
+
+// Función para manejar la página de Contenidos (ahora con template)
+func handleContenidos(w http.ResponseWriter, r *http.Request) {
+	// Obtenemos los contenidos de la base de datos
+	contenidos, err := getContenidos(db)
+	if err != nil {
+		log.Printf("Error al consultar contenidos: %v", err)
+		http.Error(w, fmt.Sprintf("Error al consultar contenidos: %v", err), http.StatusInternalServerError)
+		return
+	}
+
+	// Estructura para pasar los datos al template
+	data := struct {
+		Title      string
+		Contenidos []Contenido
+	}{
+		Title:      "Contenidos - SPREEM",
+		Contenidos: contenidos,
+	}
+
+	// Renderizamos el template con los datos
+	renderTemplate(w, "contenido.html", data)
 }
