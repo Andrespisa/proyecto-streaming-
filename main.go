@@ -95,10 +95,12 @@ func serveRegisterPage(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Mostrar mensaje de éxito
-		w.Write([]byte("Usuario registrado exitosamente"))
+		http.Redirect(w, r, "/contenidos", http.StatusSeeOther)
+
 	} else {
 		// Método no soportado
 		http.Error(w, "Método no soportado", http.StatusMethodNotAllowed)
+
 	}
 }
 
