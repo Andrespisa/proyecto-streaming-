@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes - SPREEM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: rgb(129, 0, 0);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .plan-list {
+            width: 80%;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .plan {
+            background-color: #333;
+            padding: 20px;
+            margin: 15px;
+            border-radius: 8px;
+        }
+        .plan h3 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        .plan p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: rgb(129, 0, 0);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: rgb(180, 0, 0);
+        }
+        footer {
+            background-color: rgb(20, 20, 20);
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SPREEM</h1>
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/perfiles">Perfiles</a>
+            <a href="/contenidos">Contenidos</a>
+            <a href="/suscripciones">Suscripciones</a>
+        </nav>
+    </header>
+
+    <main class="plan-list">
+        <h2>Lista de Planes de Suscripción</h2>
+        {{range .Planes}}
+        <div class="plan">
+            <h3>{{.Nombre}}</h3>
+            <p><strong>Precio:</strong> ${{.Precio}} por {{.Tipo}}</p>
+            <p><strong>Descripción:</strong> {{.Descripcion}}</p>
+            <a href="/planes/{{.IDPlan}}" class="button">Ver Detalles</a>
+        </div>
+        {{end}}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SPREEM. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

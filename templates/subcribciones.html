@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suscripciones - SPREEM</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Bienvenido a SPREEM</h1>
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/usuarios">Usuarios</a>
+            <a href="/contenidos">Contenidos</a>
+            <a href="/perfiles">Perfiles</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Lista de Suscripciones</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Plan</th>
+                    <th>Monto</th>
+                    <th>Tipo</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Expiración</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .Suscripciones}}
+                <tr>
+                    <td>{{.IDSuscripcion}}</td>
+                    <td>{{.IDUsuario}}</td>
+                    <td>{{.IDPlan}}</td>
+                    <td>{{.Monto}}</td>
+                    <td>{{.Tipo}}</td>
+                    <td>{{.FechaInicio}}</td>
+                    <td>{{.FechaExpiracion}}</td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SPREEM. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
